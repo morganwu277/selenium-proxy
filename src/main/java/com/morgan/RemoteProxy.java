@@ -32,6 +32,16 @@ import java.util.concurrent.locks.ReentrantLock;
  -timeout 180 \
  -proxy com.morgan.RemoteProxy
 
+
+
+ DEBUG_SERVER PARAMs:
+        org.openqa.grid.selenium.GridLauncherV3
+        -role hub -timeout 180
+
+ DEBUG_NODE PARAMs:
+        org.openqa.grid.selenium.GridLauncherV3
+        -role node -timeout 180 -hub http://127.0.0.1:4444/grid/register -proxy com.morgan.RemoteProxy
+
  */
 
 public class RemoteProxy extends DefaultRemoteProxy {
