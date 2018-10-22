@@ -25,11 +25,10 @@ import java.util.concurrent.locks.ReentrantLock;
             -hub http://192.168.33.1:4444/grid/register \
             -timeout 180
 
- java -cp .:dependencies/* org.openqa.grid.selenium.GridLauncherV3
- -role node \
+ java -cp .:lib/* org.openqa.grid.selenium.GridLauncherV3 \
+ -role node -timeout 180 \
  -host 127.0.0.1 -port 5550 \
  -hub http://127.0.0.1:4444/grid/register \
- -timeout 180 \
  -proxy com.morgan.RemoteProxy
 
 
@@ -44,9 +43,9 @@ import java.util.concurrent.locks.ReentrantLock;
 
  */
 
-public class RemoteProxy extends DefaultRemoteProxy {
+public class MyRemoteProxy extends DefaultRemoteProxy {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(RemoteProxy.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(MyRemoteProxy.class);
 
     private static final int DEFAULT_MAX_SESSIONS_ALLOWED = 50;
     private static final int CONNECTION_TIMEOUT = 30000;
@@ -65,7 +64,7 @@ public class RemoteProxy extends DefaultRemoteProxy {
      * @param registry a {@link GridRegistry} object that represents the Grid's registry.
      * @throws IOException
      */
-    public RemoteProxy(RegistrationRequest request, GridRegistry registry) throws IOException {
+    public MyRemoteProxy(RegistrationRequest request, GridRegistry registry) throws IOException {
         super(request, registry);
 
         proxyStartMillis = System.currentTimeMillis();
