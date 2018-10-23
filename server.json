@@ -1,5 +1,4 @@
 {
   "role": "hub",
-  "timeout": 180,
   "servlet": "com.morgan.MyConsoleServlet"
 }
