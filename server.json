@@ -1,4 +1,11 @@
 {
   "role": "hub",
-  "servlet": "com.morgan.MyConsoleServlet"
+  "servlet": "com.morgan.MyConsoleServlet",
+  "custom": {
+    "script_internet explorer": "scripts/ie/ie.sh",
+    "script_MicrosoftEdge": "scripts/edge/edge.sh",
+    "script_firefox": "scripts/firefox/firefox.sh",
+    "script_safari": "scripts/safari/safari.sh",
+    "script_chrome": "scripts/chrome/chrome.sh"
+  }
 }

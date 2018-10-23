@@ -2,9 +2,9 @@ package com.morgan;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Utils {
   // https://github.com/SeleniumHQ/selenium/wiki/DesiredCapabilities#used-by-the-selenium-server-for-browser-selection
@@ -35,8 +35,9 @@ public class Utils {
   ));
 
 
-  public static void executeCommand(String commandScript) {
-    System.out.println("[" + commandScript + "] script start running**********");
+  public static String executeCommand(String commandScript) {
+    StringBuffer bf = new StringBuffer();
+    bf.append("[" + commandScript + "] script start running**********");
     try {
       ProcessBuilder pb = new ProcessBuilder("bash", "-c", commandScript);
       final Process p = pb.start();
@@ -44,21 +45,20 @@ public class Utils {
       BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
       String line;
       while ((line = br.readLine()) != null) {
-        System.out.println(line);
+        bf.append(line + "\n");
       }
 
       // use p'stderr to construct a new input stream to read the content
       br = new BufferedReader(new InputStreamReader(p.getErrorStream()));
       while ((line = br.readLine()) != null) {
-        System.err.println(line);
+        bf.append(line + "\n");
       }
-
     } catch (Exception ex) {
-      System.out.println(ex);
+      bf.append(ex + "\n");
     }
-    System.out.println("[" + commandScript + "] script end running**********");
-
-
+    bf.append("[" + commandScript + "] script end running**********");
+    System.out.println(bf.toString());
+    return bf.toString();
   }
 }
 

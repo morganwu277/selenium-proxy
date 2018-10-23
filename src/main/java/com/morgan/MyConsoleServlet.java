@@ -5,15 +5,23 @@ import org.openqa.grid.web.servlet.RegistryBasedServlet;
 import org.openqa.selenium.remote.http.HttpMethod;
 import org.openqa.selenium.remote.http.HttpRequest;
 
-import javax.rmi.CORBA.Util;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
+import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * APIs:
+ * 1. MyConsoleServlet/healthz?browserName=safari/chrome/firefox/ie/edge
+ * <p>
+ * <p>
+ * 2. MyConsoleServlet/vm?browserName=safari/chrome/firefox/ie/edge&command=start/stop/output
+ */
 public class MyConsoleServlet extends RegistryBasedServlet {
 
   public MyConsoleServlet(GridRegistry registry) {
@@ -44,22 +52,42 @@ public class MyConsoleServlet extends RegistryBasedServlet {
     response.getWriter().close();
   }
 
+  private String requestGetParameter(HttpServletRequest request, String paramName) {
+    try {
+      return URLDecoder.decode(request.getParameter(paramName), "UTF-8");
+    } catch (UnsupportedEncodingException e) {
+      e.printStackTrace();
+    }
+    return "";
+  }
+
   private String handleRequest(HttpServletRequest request) {
     //TODO: use jackson for better json read/write
     // https://blog.csdn.net/maoyeqiu/article/details/50490249?utm_source=blogxgwz2
     String resFormat = "{\"result\":\"%s\"}";
     String res = "";
     if (request.getPathInfo().equals("/healthz")) {
-      String browserName = request.getParameter("browserName");
+      String browserName = requestGetParameter(request, "browserName");
       boolean status = isBrowserUp(browserName);
       res = String.format(resFormat, status);
     }
 
-    if (request.getPathInfo().equals("/startBrowserVM")) {
+    if (request.getPathInfo().equals("/vm")) {
       // here we will invoke vagrant to start a new VM
+      String browserName = requestGetParameter(request, "browserName");
+      String command = request.getParameter("command");
 
+      Map<String, String> scriptsConfig = new HashMap<>();
+      getRegistry().getHub().getConfiguration().custom.forEach((k, v) -> {
+        if (k.startsWith("script_")) {
+          scriptsConfig.put(k, v);
+        }
+      });
+
+      String scriptPath = scriptsConfig.get("script_" + browserName);
+      String commandOutput = Utils.executeCommand(scriptPath + " " + command);
+      res = String.format(resFormat, commandOutput);
     }
-
     return res;
 
   }
@@ -82,6 +110,7 @@ public class MyConsoleServlet extends RegistryBasedServlet {
       try {
         // try to execute an request, if can't connect, means, not up yet
         getRegistry().getHttpClient(browserMap.get(browserName)).execute(new HttpRequest(HttpMethod.GET, "/"));
+        result = true;
       } catch (IOException e) {
         result = false;
         e.printStackTrace();
@@ -93,4 +122,5 @@ public class MyConsoleServlet extends RegistryBasedServlet {
   private boolean checkBrowserName(String browserName) {
     return Utils.BROWSERS.contains(browserName);
   }
+
 }
