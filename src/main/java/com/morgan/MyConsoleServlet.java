@@ -76,20 +76,24 @@ public class MyConsoleServlet extends RegistryBasedServlet {
       // here we will invoke vagrant to start a new VM
       String browserName = requestGetParameter(request, "browserName");
       String command = request.getParameter("command");
-
-      Map<String, String> scriptsConfig = new HashMap<>();
-      getRegistry().getHub().getConfiguration().custom.forEach((k, v) -> {
-        if (k.startsWith("script_")) {
-          scriptsConfig.put(k, v);
-        }
-      });
-
-      String scriptPath = scriptsConfig.get("script_" + browserName);
+      String scriptPath = getScriptPath(browserName);
       String commandOutput = Utils.executeCommand(scriptPath + " " + command);
       res = String.format(resFormat, commandOutput);
     }
     return res;
 
+  }
+
+  private String getScriptPath(String browserName) {
+    Map<String, String> scriptsConfig = new HashMap<>();
+    getRegistry().getHub().getConfiguration().custom.forEach((k, v) -> {
+      if (k.startsWith("script_")) {
+        scriptsConfig.put(k, v);
+      }
+    });
+
+    String scriptPath = scriptsConfig.get("script_" + browserName);
+    return scriptPath;
   }
 
   private boolean isBrowserUp(String browserName) {

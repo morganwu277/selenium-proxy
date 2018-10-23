@@ -2,10 +2,10 @@
   "role": "hub",
   "servlet": "com.morgan.MyConsoleServlet",
   "custom": {
-    "script_internet explorer": "scripts/ie/ie.sh",
-    "script_MicrosoftEdge": "scripts/edge/edge.sh",
-    "script_firefox": "scripts/firefox/firefox.sh",
-    "script_safari": "scripts/safari/safari.sh",
-    "script_chrome": "scripts/chrome/chrome.sh"
+    "script_internet explorer": "nodes/ie/ie.sh",
+    "script_MicrosoftEdge": "nodes/edge/edge.sh",
+    "script_firefox": "nodes/firefox/firefox.sh",
+    "script_safari": "nodes/safari/safari.sh",
+    "script_chrome": "nodes/chrome/chrome.sh"
   }
 }
