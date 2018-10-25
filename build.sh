@@ -15,3 +15,4 @@ cd $OUT_DIR
 find . |grep .vagrant |xargs rm -rf
 find . |grep node.json$ | xargs rm -rf
 find . |grep output.log$ | xargs rm -rf
+find . |grep command_run.txt$ | xargs rm -rf
