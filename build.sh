@@ -10,3 +10,8 @@ cp -r server.json \
    dependencies/selenium-*.jar \
    target/selenium-*.jar \
    $OUT_DIR
+
+cd $OUT_DIR
+find . |grep .vagrant |xargs rm -rf
+find . |grep node.json$ | xargs rm -rf
+find . |grep output.log$ | xargs rm -rf
