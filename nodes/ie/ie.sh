@@ -12,7 +12,7 @@ function sub_in_file() {
   mv tmp.json $1
 }
 
-hub_ip="192.168.34.1"
+. ./../common.sh
 private_ip=`cat Vagrantfile | grep private_network |awk '{print $4}'|sed -e 's/"//g'`
 
 cp selenium-ie/node.json.tmpl selenium-ie/node.json
