@@ -1,4 +1,4 @@
-package com.morgan;
+package org.openqa.grid.web.servlets;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

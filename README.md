@@ -15,7 +15,7 @@
 2. start server
     `java -cp .:lib/* org.openqa.grid.selenium.GridLauncherV3 -role hub -hubConfig ../server.json`
 
-3. access `http://192.168.34.1:4444/grid/admin/MyConsoleServlet/def?browserName=safari`
+3. access `http://192.168.34.1:4444/grid/admin/NodeManage/def?browserName=safari`
 
 
 Still needs to think how to automatically start java after starting Windows...

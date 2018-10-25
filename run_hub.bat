@@ -9,5 +9,5 @@ REM //  "port": 4444,
 REM   "role": "hub",
 REM   "timeout": 180
 REM   //,
-REM   //  "servlet": "com.morgan.MyConsoleServlet"
+REM   //  "servlet": "org.openqa.grid.web.servlets.NodeManage"
 REM }

@@ -1,6 +1,6 @@
 {
   "role": "hub",
-  "servlet": "com.morgan.MyConsoleServlet",
+  "servlet": "org.openqa.grid.web.servlets.NodeManage",
   "custom": {
     "script_internet explorer": "nodes/ie/ie.sh",
     "script_MicrosoftEdge": "nodes/edge/edge.sh",

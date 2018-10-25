@@ -1,4 +1,4 @@
-package com.morgan;
+package org.openqa.grid.web.servlets;
 
 import org.openqa.grid.internal.GridRegistry;
 import org.openqa.grid.web.servlet.RegistryBasedServlet;
@@ -17,18 +17,18 @@ import java.util.Map;
 
 /**
  * APIs:
- * 1. MyConsoleServlet/healthz?browserName=safari/chrome/firefox/ie/edge
+ * 1. NodeManage/healthz?browserName=safari/chrome/firefox/edge/internet explorer
  * <p>
  * <p>
- * 2. MyConsoleServlet/vm?browserName=safari/chrome/firefox/ie/edge&command=start/stop/output
+ * 2. NodeManage/node?browserName=safari/chrome/firefox/ie/edge&command=start/stop/output
  */
-public class MyConsoleServlet extends RegistryBasedServlet {
+public class NodeManage extends RegistryBasedServlet {
 
-  public MyConsoleServlet(GridRegistry registry) {
+  public NodeManage(GridRegistry registry) {
     super(registry);
   }
 
-  public MyConsoleServlet() {
+  public NodeManage() {
     super(null);
   }
 
@@ -72,7 +72,7 @@ public class MyConsoleServlet extends RegistryBasedServlet {
       res = String.format(resFormat, status);
     }
 
-    if (request.getPathInfo().equals("/vm")) {
+    if (request.getPathInfo().equals("/node")) {
       // here we will invoke vagrant to start a new VM
       String browserName = requestGetParameter(request, "browserName");
       String command = request.getParameter("command");
