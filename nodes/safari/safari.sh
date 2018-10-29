@@ -34,5 +34,10 @@ if [[ "$1" == "output" ]]; then
     cat selenium-*/output.log
 fi
 
+if [[ "$1" == "log" ]]; then
+    echo "getting log..."
+    cat selenium-*/output.log
+fi
+
 
 
