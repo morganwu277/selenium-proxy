@@ -22,3 +22,15 @@ function vagrant_up() {
 function vagrant_down() {
   vagrant halt
 }
+
+# start selenium node in the background
+function bg_start_selenium_node() {
+  java -cp selenium-server-standalone-3.14.0.jar org.openqa.grid.selenium.GridLauncherV3 -role node -nodeConfig node.json > output.log 2>&1 &
+}
+
+# stop selenium node
+function bg_stop_selenium_node() {
+  pid=`ps -ef|grep GridLauncherV3 |grep node|awk '{print $2}'`
+  kill $pid
+}
+
