@@ -17,10 +17,10 @@ import java.util.Map;
 
 /**
  * APIs:
- * 1. NodeManage/healthz?browserName=safari/chrome/firefox/edge/internet explorer
+ * 1. NodeManage/healthz?browserName=safari/chrome/firefox/MicrosoftEdge/internet explorer
  * <p>
  * <p>
- * 2. NodeManage/node?browserName=safari/chrome/firefox/ie/edge&command=start/stop/output
+ * 2. NodeManage/node?browserName=safari/chrome/firefox/internet explorer/MicrosoftEdge&command=start/stop/output
  */
 public class NodeManage extends RegistryBasedServlet {
 
