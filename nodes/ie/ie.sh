@@ -6,7 +6,7 @@ cd $DIR
 
 . ./../common.sh
 
-private_ip="192.168.34.24"
+private_ip="192.168.35.20"
 browserName="ie"
 
 cp ./../selenium/selenium-server-standalone-3.14.0.jar selenium-$browserName/
