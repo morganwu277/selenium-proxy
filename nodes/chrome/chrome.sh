@@ -42,6 +42,7 @@ fi
 
 if [[ "$1" == "status" ]]; then
     echo "checking status..."
+    # TODO: checking if node.json contains this chrome?
     if ps -ef | grep node.json | grep -v -q grep; then
       echo "up"
     else
