@@ -39,4 +39,11 @@ if [[ "$1" == "log" ]]; then
     cat selenium-*/output.log
 fi
 
-
+if [[ "$1" == "status" ]]; then
+    echo "checking status..."
+    if ps -ef | grep node.json | grep -v -q grep; then
+      echo "up"
+    else
+      echo "down"
+    fi
+fi
