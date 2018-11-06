@@ -6,7 +6,8 @@ cd $DIR
 
 . ./../common.sh
 
-private_ip="192.168.34.1"
+private_ip="127.0.0.1"
+hub_ip="127.0.0.1"
 browserName="firefox"
 
 cp ./../selenium/selenium-server-standalone-3.14.0.jar selenium-$browserName/
