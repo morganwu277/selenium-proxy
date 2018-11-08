@@ -61,6 +61,10 @@ https://www.vagrantup.com/docs/boxes/base.html
 https://www.vagrantup.com/docs/boxes/base.html#additional-winrm-1-1-configuration
 5. using the proteted mode level in all zone, either ON or OFF, but should be the same
 https://github.com/seleniumQuery/seleniumQuery/wiki/seleniumQuery-and-IE-Driver#change-the-protected-mode-in-all-zones
+6. Win10 Optimization
+http://www.xitonghe.com/jiaocheng/Windows10-3467.html
+7. Win8 Optimization
+https://www.iplaysoft.com/windows8-you-hua-ji-qiao.html
 
 # install web driver 16.16299
 
