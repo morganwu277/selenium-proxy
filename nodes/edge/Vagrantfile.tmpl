@@ -79,6 +79,9 @@ Vagrant.configure("2") do |config|
   #   apt-get update
   #   apt-get install -y apache2
   # SHELL
-  config.vm.provision "shell", path: "./start_selenium_node.ps1"
-  
+  config.vm.provision "shell" do |s|
+    s.path = "./start_selenium_node.ps1"
+    s.powershell_elevated_interactive = "true"
+    s.privileged = "true"
+  end
 end
