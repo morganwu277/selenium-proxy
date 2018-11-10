@@ -28,6 +28,43 @@ https://www.networkcomputing.com/networking/how-enable-windows-10-auto-login/402
 ```bash
 vagrant snapshot save "init_state" --force ; vagrant snapshot restore --provision init_state
 ```
+## 6. For IE
+### 1. IEDriverServer
+https://github.com/SeleniumHQ/selenium/wiki/InternetExplorerDriver
+needs to create `HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BFCACHE`, and then create a `DWORD` key, as `iexplore.exe`=`0`.
+### 2. OS settings
+1. auto login
+2. Vagrantfile settings
+```bash
+  config.vm.communicator = "winrm"
+  config.vm.guest = "windows"
+
+  config.winrm.username = "IEUser"
+  config.winrm.password = "Passw0rd!"
+  config.winrm.timeout = 180
+
+  config.ssh.username = "IEUser"
+  config.ssh.password = "Passw0rd!"
+  config.ssh.extra_args = "cmd"  # cmd or powershell
+```
+
+```bash
+  config.vm.provision "shell" do |s|
+    s.path = "./start_selenium_node.ps1"
+    s.powershell_elevated_interactive = "true"
+    s.privileged = "true"
+  end
+```
+3. WINRM settings in CMD
+https://www.vagrantup.com/docs/boxes/base.html
+4. firewall settings
+https://www.vagrantup.com/docs/boxes/base.html#additional-winrm-1-1-configuration
+5. using the proteted mode level in all zone, either ON or OFF, but should be the same
+https://github.com/seleniumQuery/seleniumQuery/wiki/seleniumQuery-and-IE-Driver#change-the-protected-mode-in-all-zones
+6. Win10 Optimization
+http://www.xitonghe.com/jiaocheng/Windows10-3467.html
+7. Win8 Optimization
+https://www.iplaysoft.com/windows8-you-hua-ji-qiao.html
 
 # install web driver 16.16299
 

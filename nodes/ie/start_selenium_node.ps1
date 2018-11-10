@@ -11,7 +11,7 @@ $password = 'Passw0rd!'
 $securePassword = ConvertTo-SecureString $password -AsPlainText -Force
 $credential = New-Object System.Management.Automation.PSCredential $username, $securePassword
 
-Start-Process -FilePath "powershell" -Credential $credential -ArgumentList "java", "-cp", "selenium-server-standalone-3.14.0.jar", "org.openqa.grid.selenium.GridLauncherV3", "-role", "node", "-nodeConfig", "node.json", ">", "output.log", "2>&1"
+Start-Process -FilePath "powershell" -Credential $credential -ArgumentList "java", "-cp", "selenium-server-standalone-3.14.0.jar", "org.openqa.grid.selenium.GridLauncherV3", "-debug", "-role", "node", "-nodeConfig", "node.json", ">", "output.log", "2>&1"
 
 
 
