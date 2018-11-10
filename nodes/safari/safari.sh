@@ -27,6 +27,7 @@ fi
 
 if [[ "$1" == "stop" ]]; then
     echo "stop... $browserName"
+    ps -ef|grep safaridriver |grep -v grep |awk '{print $2}'|xargs kill
     bg_stop_selenium_node
 fi
 
@@ -44,6 +45,8 @@ if [[ "$1" == "status" ]]; then
     echo "checking status..."
     # TODO: checking if node.json contains this safari?
     if ps -ef | grep node.json | grep -v -q grep; then
+      echo "up"
+    elif ps -ef | grep safaridriver | grep -v -q grep; then
       echo "up"
     else
       echo "down"
