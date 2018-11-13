@@ -18,4 +18,3 @@
 3. access `http://192.168.34.1:4444/grid/admin/NodeManage/def?browserName=safari`
 
 
-Still needs to think how to automatically start java after starting Windows...
