@@ -13,6 +13,8 @@ browserName="safari"
 cp ./../selenium/selenium-server-standalone-3.14.0.jar selenium-$browserName/
 
 # sub variables
+[[ -f Vagrantfile.tmpl ]] && cp Vagrantfile.tmpl Vagrantfile
+[[ -f Vagrantfile.tmpl ]] && sub_in_file Vagrantfile "<private_ip>" "$private_ip"
 cp selenium-$browserName/node.json.tmpl selenium-$browserName/node.json
 sub_in_file selenium-$browserName/node.json "<private_ip>" "$private_ip"
 sub_in_file selenium-$browserName/node.json "<hub_ip>" "$hub_ip"
@@ -20,21 +22,17 @@ sub_in_file selenium-$browserName/node.json "<hub_ip>" "$hub_ip"
 
 if [[ "$1" == "start" ]]; then
     echo "start... $browserName"
-    cd selenium-$browserName
-    bg_start_selenium_node
-    cd -
+    vagrant_up > command_run.txt 2>&1 &
 fi
 
 if [[ "$1" == "stop" ]]; then
     echo "stop... $browserName"
-    # ps -ef|grep 'safaridriver' |grep -v grep |awk '{print $2}'|xargs kill
-    # ps -ef|grep 'Safari --automation' |grep -v grep |awk '{print $2}'|xargs kill
-    bg_stop_selenium_node
+    vagrant_down > command_run.txt 2>&1 &
 fi
 
 if [[ "$1" == "output" ]]; then
-    echo "getting log..."
-    cat selenium-*/output.log
+    echo "getting command output..."
+    cat command_run.txt
 fi
 
 if [[ "$1" == "log" ]]; then
@@ -44,15 +42,9 @@ fi
 
 if [[ "$1" == "status" ]]; then
     echo "checking status..."
-    # TODO: checking if node.json contains this safari?
-    if ps -ef | grep node.json | grep -v -q grep; then
+    if ps -ef | grep safari_default | grep -v -q grep; then
       echo "up"
-    # elif ps -ef | grep 'safaridriver' | grep -v -q grep; then
-    #   echo "up"
-    # elif ps -ef | grep 'Safari --automation' | grep -v -q grep; then
-    #   echo "up"
     else
       echo "down"
     fi
 fi
-

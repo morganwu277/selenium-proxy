@@ -22,12 +22,12 @@ sub_in_file selenium-$browserName/node.json "<hub_ip>" "$hub_ip"
 
 if [[ "$1" == "start" ]]; then
     echo "start... $browserName"
-    vagrant up --provision > command_run.txt 2>&1 &
+    vagrant_up > command_run.txt 2>&1 &
 fi
 
 if [[ "$1" == "stop" ]]; then
     echo "stop... $browserName"
-    vagrant halt > command_run.txt 2>&1 &
+    vagrant_down > command_run.txt 2>&1 &
 fi
 
 if [[ "$1" == "output" ]]; then
