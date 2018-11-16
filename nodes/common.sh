@@ -20,7 +20,7 @@ function vagrant_up() {
 }
 
 function vagrant_down() {
-  vagrant halt
+  vagrant suspend
 }
 
 # start selenium node in the background
